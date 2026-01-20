@@ -15,6 +15,7 @@ private slots:
     void onAddCircle();
     void onAddRectangle();
     void onSaveMap();
+    void onDeleteObstacle();
 
 private:
     MapWidget *mapWidget;

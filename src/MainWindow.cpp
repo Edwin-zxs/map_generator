@@ -80,7 +80,12 @@ void MainWindow::setupUi() {
 
     // Righ side of upper half (Controls)
     QVBoxLayout *gButtonsLayout = new QVBoxLayout();
-    // 3. Save and exit Button 
+    // 3. Function buttons
+
+    QPushButton *deleteObstacleBtn = new QPushButton("Delete recently added Obstacle");
+    connect(deleteObstacleBtn, &QPushButton::clicked, this, &MainWindow::onDeleteObstacle);
+    gButtonsLayout->addWidget(deleteObstacleBtn);
+    
     QPushButton *saveMapBtn = new QPushButton("Save Map");
     connect(saveMapBtn, &QPushButton::clicked, this, &MainWindow::onSaveMap);
     gButtonsLayout->addWidget(saveMapBtn);
@@ -132,4 +137,9 @@ void MainWindow::onSaveMap() {
     }
     mapWidget->saveMap(fileName);
 }
+
+void MainWindow::onDeleteObstacle() {
+    mapWidget->deleteLastObstacle();
+}
+    
 

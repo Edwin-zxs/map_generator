@@ -11,12 +11,34 @@ MapWidget::MapWidget(QWidget *parent) : QWidget(parent) {
 
 void MapWidget::addCircle(double x, double y, double radius) {
     circles.push_back({x, y, radius});
+    obstacleHistory.push_back(ObstacleType::Circle);
     update(); // Trigger repaint
 }
 
 void MapWidget::addRectangle(double x, double y, double width, double height) {
     rectangles.push_back({x, y, width, height});
+    obstacleHistory.push_back(ObstacleType::Rectangle);
     update(); // Trigger repaint
+}
+
+void MapWidget::deleteLastObstacle() {
+    if (obstacleHistory.empty()) {
+        return;
+    }
+
+    ObstacleType lastType = obstacleHistory.back();
+    obstacleHistory.pop_back();
+
+    if (lastType == ObstacleType::Circle) {
+        if (!circles.empty()) {
+            circles.pop_back();
+        }
+    } else if (lastType == ObstacleType::Rectangle) {
+        if (!rectangles.empty()) {
+            rectangles.pop_back();
+        }
+    }
+    update();
 }
 
 void MapWidget::saveMap(const QString &fileName) {
