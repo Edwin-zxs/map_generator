@@ -1,0 +1,1 @@
+This is a map generator for a mobile robot navigation project I'm working on. It uses Perlin noise to generate a map.
